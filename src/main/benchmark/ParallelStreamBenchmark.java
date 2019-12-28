@@ -3,6 +3,7 @@ package benchmark;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.RandomStringUtils.*;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -19,7 +20,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.apache.commons.lang3.RandomStringUtils.*;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -29,7 +29,7 @@ import org.apache.commons.lang3.RandomStringUtils.*;
 @Measurement(iterations = 10)
 public class ParallelStreamBenchmark {
 
-    @Param({"100","1500","500000"})
+    @Param({"100", "1500", "500000"})
     private int numberOfElements;
 
     private List<String> someStrings;
@@ -57,7 +57,11 @@ public class ParallelStreamBenchmark {
         }
     }
 
-    private List<String> createListOfStrings(){
-        String aString = randomAlphabetic(64);
+    private List<String> createListOfStrings() {
+        List<String> list = new ArrayList<>;
+        for (int index = 0; index <= numberOfElements; index++) {
+            list.add(randomAlphabetic(64));
+        }
+        return list;
     }
 }
