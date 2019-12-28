@@ -15,7 +15,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -26,7 +25,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class ParallelStreamBenchmark {
 
     @Param({"100", "1500", "500000"})
-    private int numberOfElements;
+    private int numberOfElements =10;
 
     private List<String> someStrings;
 
@@ -36,7 +35,8 @@ public class ParallelStreamBenchmark {
     }
 
     @Benchmark
-    public void loopFor(Blackhole bh) {
+    public void loopFor() {
+        System.out.println(someStrings.get(0));
 
     }
 
