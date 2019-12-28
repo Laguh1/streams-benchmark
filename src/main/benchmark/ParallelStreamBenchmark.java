@@ -29,8 +29,8 @@ import org.apache.commons.lang3.RandomStringUtils.*;
 @Measurement(iterations = 10)
 public class ParallelStreamBenchmark {
 
-    @Param({"10000000"})
-    private int N;
+    @Param({"100","1500","500000"})
+    private int numberOfElements;
 
     private List<String> someStrings;
 
