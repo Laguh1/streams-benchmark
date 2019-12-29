@@ -1,5 +1,7 @@
 package benchmark;
 
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,9 +9,8 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Setup;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
-public class BenchmarkRunner {
+public class ParallelStreamBenchmark {
 
     @Param({"100", "1500", "500000"})
     private int numberOfElements =10;
