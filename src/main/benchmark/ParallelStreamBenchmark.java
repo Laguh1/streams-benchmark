@@ -41,21 +41,19 @@ public class ParallelStreamBenchmark {
     }
 
     @Benchmark
-    public void parallelStream() {
-         someStrings.parallelStream()
+    public List<String> sequentialStream() {
+        return someStrings.stream()
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
-
     }
 
     @Benchmark
-    public void sequentialStream() {
-        someStrings.stream()
+    public List<String> parallelStream() {
+        return someStrings.parallelStream()
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
-
     }
 
     private List<String> createListOfStrings() {
