@@ -4,6 +4,7 @@ import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -30,8 +31,9 @@ public class ParallelStreamBenchmark {
 
     private List<String> createListOfStrings() {
         List<String> list = new ArrayList<>();
+        Random r = new Random();
         for (int index = 0; index <= numberOfElements; index++) {
-            list.add(randomAlphabetic(64));
+            list.add(randomAlphabetic(r.nextInt(10) + 1));
         }
         return list;
     }
