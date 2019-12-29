@@ -24,16 +24,17 @@ import org.openjdk.jmh.annotations.Warmup;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
-@Warmup(iterations = 3)
-@Measurement(iterations = 8)
+@Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx4G"})
+@Warmup(iterations = 2)
+@Measurement(iterations = 2)
 public class ParallelStreamBenchmark {
 
     @Param({"100", "1500", "500000"})
-    private int numberOfElements = 10;
+    private int numberOfElements;
 
     private List<String> someStrings;
 
+    //Creates a new List of random Strings every time the benchmark method is invoked
     @Setup(Level.Invocation)
     public void setup() {
         someStrings = createListOfStrings();
@@ -41,7 +42,16 @@ public class ParallelStreamBenchmark {
 
     @Benchmark
     public void parallelStream() {
-         someStrings.stream()
+         someStrings.parallelStream()
+                .filter(string -> string.length() > 5)
+                .peek(string -> string.replace(string.charAt(5), 'z'))
+                .collect(Collectors.toList());
+
+    }
+
+    @Benchmark
+    public void sequentialStream() {
+        someStrings.stream()
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
@@ -51,7 +61,7 @@ public class ParallelStreamBenchmark {
     private List<String> createListOfStrings() {
         List<String> list = new ArrayList<>();
         Random r = new Random();
-        for (int index = 0; index <= numberOfElements; index++) {
+        for (int index = 0; index < numberOfElements; index++) {
             list.add(randomAlphabetic(r.nextInt(10) + 1));
         }
         return list;
