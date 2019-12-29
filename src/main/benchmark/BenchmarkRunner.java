@@ -1,4 +1,4 @@
-package benchmark;
+package main.benchmark;
 
 public class BenchmarkRunner {
 
