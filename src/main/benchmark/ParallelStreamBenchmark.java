@@ -23,11 +23,11 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx4G"})
-@Warmup(iterations = 2)
-@Measurement(iterations = 2)
+@Fork(value = 2, jvmArgs = {"-Xms8G", "-Xmx8G"})
+@Warmup(iterations = 10)
+@Measurement(iterations = 20)
 public class ParallelStreamBenchmark {
-
+/*
     @Benchmark
     public List<String> sequentialStream(GivenState state) {
         return state.someStrings.stream()
@@ -51,8 +51,18 @@ public class ParallelStreamBenchmark {
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
-    }
+    }*/
 
+    @Benchmark
+    public List<String> parallelUnorderedDistinctStream(GivenState state) {
+        return state.someStrings.parallelStream()
+                .unordered()
+                .distinct()
+                .filter(string -> string.length() > 5)
+                .peek(string -> string.replace(string.charAt(5), 'z'))
+                .collect(Collectors.toList());
+    }
+/*
     @Benchmark
     public List<String> parallelDistinctStream(GivenState state) {
         return state.someStrings.parallelStream()
@@ -60,25 +70,14 @@ public class ParallelStreamBenchmark {
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
-    }
-
-    @Benchmark
-    public List<String> parallelDistinctUnorderedStream(GivenState state) {
-        return state.someStrings.parallelStream()
-                .distinct()
-                .unordered()
-                .filter(string -> string.length() > 5)
-                .peek(string -> string.replace(string.charAt(5), 'z'))
-                .collect(Collectors.toList());
-    }
+    }*/
 
     @State(Scope.Benchmark)
     public static class GivenState {
 
-        @Param({"100", "1500", "500000"})
-        private int numberOfElements;
-
         public List<String> someStrings;
+        @Param({"500000"})
+        private int numberOfElements;
 
         //Creates a new List of random Strings every time the benchmark method is invoked
         @Setup(Level.Invocation)
