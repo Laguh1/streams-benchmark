@@ -8,4 +8,9 @@ public class Configuration {
     final static String LARGE_COLLECTION = "500000";
     final static String AVERAGE_COLLECTION = "1500";
     final static String SMALL_COLLECTION = "100";
+    final static int SMALL_NUMBER_OF_THREADS = 4;
+    final static int EXACT_NUMBER_OF_THREADS = 7;
+    final static int JUST_ABOVE__NUMBER_OF_THREADS = 8;
+    final static int LARGE_NUMBER_OF_THREADS = 21;
+
 }

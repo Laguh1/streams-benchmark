@@ -15,13 +15,13 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 
-
 public class BuildState {
 
     @State(Scope.Benchmark)
     public static class GivenState {
 
         public List<String> someStrings;
+
         @Param({LARGE_COLLECTION, AVERAGE_COLLECTION, SMALL_COLLECTION})
         private int numberOfElements;
 
@@ -29,7 +29,7 @@ public class BuildState {
         @Setup(Level.Invocation)
         public void setUp() {
             someStrings = createListOfStrings();
-            System.out.print(someStrings.size()+" ");
+            System.out.print(someStrings.size() + " ");
         }
 
         private List<String> createListOfStrings() {
