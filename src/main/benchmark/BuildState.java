@@ -1,5 +1,8 @@
 package main.benchmark;
 
+import static main.benchmark.Configuration.AVERAGE_COLLECTION;
+import static main.benchmark.Configuration.LARGE_COLLECTION;
+import static main.benchmark.Configuration.SMALL_COLLECTION;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ public class BuildState {
     public static class GivenState {
 
         public List<String> someStrings;
-        @Param({"10"})
+        @Param({LARGE_COLLECTION, AVERAGE_COLLECTION, SMALL_COLLECTION})
         private int numberOfElements;
 
         //Creates a new List of random Strings every time the benchmark method is invoked
