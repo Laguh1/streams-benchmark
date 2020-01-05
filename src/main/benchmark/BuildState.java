@@ -1,8 +1,7 @@
 package main.benchmark;
 
-import static main.benchmark.Configuration.AVERAGE_COLLECTION;
-import static main.benchmark.Configuration.LARGE_COLLECTION;
-import static main.benchmark.Configuration.SMALL_COLLECTION;
+import static main.benchmark.Configuration.VERY_LARGE_COLLECTION;
+import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 import java.util.ArrayList;
@@ -21,15 +20,17 @@ public class BuildState {
     public static class GivenState {
 
         public List<String> someStrings;
+        public List<Employee> employees;
 
-        @Param({LARGE_COLLECTION, AVERAGE_COLLECTION, SMALL_COLLECTION})
+       // @Param({VERY_LARGE_COLLECTION ,LARGE_COLLECTION, AVERAGE_COLLECTION, SMALL_COLLECTION})
+       @Param({VERY_LARGE_COLLECTION })
         private int numberOfElements;
 
         //Creates a new List of random Strings every time the benchmark method is invoked
         @Setup(Level.Invocation)
         public void setUp() {
             someStrings = createListOfStrings();
-            System.out.print(someStrings.size() + " ");
+            employees = createListOfEmployees();
         }
 
         private List<String> createListOfStrings() {
@@ -39,6 +40,41 @@ public class BuildState {
                 list.add(randomAlphabetic(r.nextInt(10) + 1));
             }
             return list;
+        }
+
+        private List<Employee> createListOfEmployees(){
+            List<Employee> list = new ArrayList<>();
+            for (int index = 0; index < numberOfElements; index++) {
+                list.add(new Employee(String.format("%02d", index), random(1, 'm','f')));
+            }
+            return list;
+        }
+
+        class Employee {
+            private String id;
+            private String genre;
+
+
+            public Employee(String id, String genre){
+                this.id = id;
+                this.genre = genre;
+            }
+
+            public String getGenre() {
+                return genre;
+            }
+
+            public void setGenre(String genre) {
+                this.genre = genre;
+            }
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
         }
     }
 }
