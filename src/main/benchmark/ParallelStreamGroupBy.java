@@ -6,7 +6,6 @@ import static main.benchmark.Configuration.WARM_UP_ITERATIONS;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -25,6 +24,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = MEASURE_ITERATIONS)
 public class ParallelStreamGroupBy {
 
+    /*
     @Benchmark
     public Map<String, List<BuildState.GivenState.Employee>> sequentialStreamGroupBy(BuildState.GivenState state) {
         return state.employees.stream().collect(Collectors.groupingBy(e -> e.getGenre()));
@@ -43,6 +43,11 @@ public class ParallelStreamGroupBy {
     @Benchmark
     public ConcurrentMap<String, List<BuildState.GivenState.Employee>> parallelStreamConcurrentGroupBy(BuildState.GivenState state) {
         return state.employees.parallelStream().collect(Collectors.groupingByConcurrent(e -> e.getGenre()));
+    }
+*/
+    @Benchmark
+    public Map<String, List<BuildState.GivenState.Employee>> parallelStreamDisticntGroupBy(BuildState.GivenState state) {
+        return state.employees.parallelStream().unordered().collect(Collectors.groupingBy(e -> e.getGenre()));
     }
 
 }
