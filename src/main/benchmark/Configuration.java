@@ -10,6 +10,7 @@ public class Configuration {
     final static String LARGE_COLLECTION = "10000";
     final static String AVERAGE_COLLECTION = "1500";
     final static String SMALL_COLLECTION = "100";
+    final static String EXTREMELY_SMALL_COLLECTION = "10";
 
     final static int SMALL_NUMBER_OF_THREADS = 4;
     final static int EXACT_NUMBER_OF_THREADS = 7;

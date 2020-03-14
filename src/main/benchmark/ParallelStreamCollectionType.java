@@ -18,33 +18,55 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = NUMBER_OF_FORKS, jvmArgs = {"-Xms8G", "-Xmx8G"})
 @Warmup(iterations = WARM_UP_ITERATIONS)
-public class ParallelStreamDistinct {
+public class ParallelStreamCollectionType {
+
 
     @Benchmark
-    public List<String> sequentialDistinctStream(BuildState.GivenState state) {
+    public List<String> sequentialList(BuildState.GivenState state) {
         return state.someStrings.stream()
-                .distinct()
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
     }
 
     @Benchmark
-    public List<String> parallelDistinctStream(BuildState.GivenState state) {
+    public List<String> parallelList(BuildState.GivenState state) {
         return state.someStrings.parallelStream()
-                .distinct()
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
     }
 
     @Benchmark
-    public List<String> parallelUnorderedDistinctStream(BuildState.GivenState state) {
-        return state.someStrings.parallelStream()
-                .unordered()
-                .distinct()
+    public List<String> sequentialSet(BuildState.GivenState state) {
+        return state.setOfStrings.stream()
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
     }
+
+    @Benchmark
+    public List<String> parallelSet(BuildState.GivenState state) {
+        return state.setOfStrings.parallelStream()
+                .filter(string -> string.length() > 5)
+                .peek(string -> string.replace(string.charAt(5), 'z'))
+                .collect(Collectors.toList());
+    }
+
+    @Benchmark
+    public List<String> sequentialLinkedList(BuildState.GivenState state) {
+        return state.linkedStrings.stream()
+                .filter(string -> string.length() > 5)
+                .peek(string -> string.replace(string.charAt(5), 'z'))
+                .collect(Collectors.toList());
+    }
+
+    @Benchmark
+    public List<String> parallelLinkedList(BuildState.GivenState state) {
+        return state.linkedStrings.parallelStream()
+                .filter(string -> string.length() > 5)
+                .peek(string -> string.replace(string.charAt(5), 'z'))
+                .collect(Collectors.toList());
+    }
+
 }
