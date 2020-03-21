@@ -23,7 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = MEASURE_ITERATIONS)
 public class ParallelStreamBenchmark {
 
-    @Benchmark
+   @Benchmark
     public List<String> sequentialStream(BuildState.GivenState state) {
         return state.someStrings.stream()
                 .filter(string -> string.length() > 5)
@@ -31,7 +31,7 @@ public class ParallelStreamBenchmark {
                 .collect(Collectors.toList());
     }
 
-    @Benchmark
+  @Benchmark
     public List<String> parallelStream(BuildState.GivenState state) {
         return state.someStrings.parallelStream()
                 .filter(string -> string.length() > 5)

@@ -23,7 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = MEASURE_ITERATIONS)
 public class ParallelStreamLimit {
 
-    @Benchmark
+   @Benchmark
     public List<String> parallelStreamLimit(BuildState.GivenState state) {
         return state.someStrings.parallelStream().filter(string -> string.length() > 5).limit(10000).collect(Collectors.toList());
     }

@@ -37,7 +37,9 @@ public class ParallelStreamSort {
 
     @Benchmark
     public List<String> parallelStreamSort(BuildState.GivenState state) {
-        return  state.someStrings.parallelStream().sorted().collect(Collectors.toList());
+        return  state.someStrings.parallelStream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     @Benchmark
@@ -47,6 +49,8 @@ public class ParallelStreamSort {
 
     @Benchmark
     public List<String> sequentialStreamSort(BuildState.GivenState state) {
-        return state.someStrings.stream().sorted().collect(Collectors.toList());
+        return state.someStrings.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

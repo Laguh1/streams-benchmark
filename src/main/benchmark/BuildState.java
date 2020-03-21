@@ -1,6 +1,6 @@
 package main.benchmark;
 
-import static main.benchmark.Configuration.SMALL_COLLECTION;
+import static main.benchmark.Configuration.VERY_LARGE_COLLECTION;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
@@ -30,7 +30,7 @@ public class BuildState {
         public List<String> limitedStrings;
 
         // @Param({VERY_LARGE_COLLECTION ,LARGE_COLLECTION, AVERAGE_COLLECTION, SMALL_COLLECTION})
-        @Param({SMALL_COLLECTION})
+        @Param({VERY_LARGE_COLLECTION})
         private int numberOfElements;
 
         //Creates a new List of random Strings every time the benchmark method is invoked

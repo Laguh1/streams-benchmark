@@ -4,8 +4,13 @@ import static main.benchmark.Configuration.MEASURE_ITERATIONS;
 import static main.benchmark.Configuration.NUMBER_OF_FORKS;
 import static main.benchmark.Configuration.WARM_UP_ITERATIONS;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
+import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
@@ -20,7 +25,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = MEASURE_ITERATIONS)
 public class ParallelStreamGroupBy {
 
-    /*
+
     @Benchmark
     public Map<String, List<BuildState.GivenState.Employee>> sequentialStreamGroupBy(BuildState.GivenState state) {
         return state.employees.stream().collect(Collectors.groupingBy(e -> e.getGenre()));
@@ -44,7 +49,7 @@ public class ParallelStreamGroupBy {
     @Benchmark
     public Map<String, List<BuildState.GivenState.Employee>> parallelStreamDisticntGroupBy(BuildState.GivenState state) {
         return state.employees.parallelStream().unordered().collect(Collectors.groupingBy(e -> e.getGenre()));
-    }*/
+    }
 
 
 }
