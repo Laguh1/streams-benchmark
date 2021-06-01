@@ -1,8 +1,12 @@
-package main.benchmark;
+package benchmark;
 
-import static main.benchmark.Configuration.VERY_LARGE_COLLECTION;
-import static org.apache.commons.lang3.RandomStringUtils.random;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static benchmark.Configuration.LARGE_COLLECTION;
+import static benchmark.Configuration.SMALL_COLLECTION;
+import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,11 +16,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
+import static benchmark.Configuration.VERY_LARGE_COLLECTION;
+import static org.apache.commons.lang3.RandomStringUtils.random;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class BuildState {
 
@@ -30,7 +32,7 @@ public class BuildState {
         public List<String> limitedStrings;
 
         // @Param({VERY_LARGE_COLLECTION ,LARGE_COLLECTION, AVERAGE_COLLECTION, SMALL_COLLECTION})
-        @Param({VERY_LARGE_COLLECTION})
+        @Param({SMALL_COLLECTION})
         private int numberOfElements;
 
         //Creates a new List of random Strings every time the benchmark method is invoked

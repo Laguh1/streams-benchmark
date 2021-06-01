@@ -1,8 +1,8 @@
-package main.benchmark;
+package benchmark;
 
-import static main.benchmark.Configuration.MEASURE_ITERATIONS;
-import static main.benchmark.Configuration.NUMBER_OF_FORKS;
-import static main.benchmark.Configuration.WARM_UP_ITERATIONS;
+import static benchmark.Configuration.MEASURE_ITERATIONS;
+import static benchmark.Configuration.NUMBER_OF_FORKS;
+import static benchmark.Configuration.WARM_UP_ITERATIONS;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

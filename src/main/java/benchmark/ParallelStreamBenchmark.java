@@ -1,8 +1,8 @@
-package main.benchmark;
+package benchmark;
 
-import static main.benchmark.Configuration.MEASURE_ITERATIONS;
-import static main.benchmark.Configuration.NUMBER_OF_FORKS;
-import static main.benchmark.Configuration.WARM_UP_ITERATIONS;
+import static benchmark.Configuration.MEASURE_ITERATIONS;
+import static benchmark.Configuration.NUMBER_OF_FORKS;
+import static benchmark.Configuration.WARM_UP_ITERATIONS;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -21,33 +21,22 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(value = NUMBER_OF_FORKS, jvmArgs = {"-Xms8G", "-Xmx8G"})
 @Warmup(iterations = WARM_UP_ITERATIONS)
 @Measurement(iterations = MEASURE_ITERATIONS)
-public class ParallelStreamDistinct {
+public class ParallelStreamBenchmark {
 
- @Benchmark
-    public List<String> sequentialDistinctStream(BuildState.GivenState state) {
+    @Benchmark
+    public List<String> sequentialStream(BuildState.GivenState state) {
         return state.someStrings.stream()
-                .distinct()
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
     }
 
-   @Benchmark
-    public List<String> parallelDistinctStream(BuildState.GivenState state) {
+    @Benchmark
+    public List<String> parallelStream(BuildState.GivenState state) {
         return state.someStrings.parallelStream()
-                .distinct()
                 .filter(string -> string.length() > 5)
                 .peek(string -> string.replace(string.charAt(5), 'z'))
                 .collect(Collectors.toList());
     }
 
-   @Benchmark
-    public List<String> parallelUnorderedDistinctStream(BuildState.GivenState state) {
-        return state.someStrings.parallelStream()
-                .unordered()
-                .distinct()
-                .filter(string -> string.length() > 5)
-                .peek(string -> string.replace(string.charAt(5), 'z'))
-                .collect(Collectors.toList());
-    }
 }

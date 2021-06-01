@@ -1,10 +1,10 @@
-package main.benchmark;
+package benchmark;
 
 public class Configuration {
 
     final static int NUMBER_OF_FORKS = 2;
-    final static int WARM_UP_ITERATIONS = 5;
-    final static int MEASURE_ITERATIONS = 30;
+    final static int WARM_UP_ITERATIONS = 3;
+    final static int MEASURE_ITERATIONS = 5;
 
     final static String VERY_LARGE_COLLECTION = "500000";
     final static String LARGE_COLLECTION = "10000";

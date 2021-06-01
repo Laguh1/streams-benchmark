@@ -1,8 +1,4 @@
-package main.benchmark;
-
-import static main.benchmark.Configuration.MEASURE_ITERATIONS;
-import static main.benchmark.Configuration.NUMBER_OF_FORKS;
-import static main.benchmark.Configuration.WARM_UP_ITERATIONS;
+package benchmark;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +8,10 @@ import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Warmup;
+
+import static benchmark.Configuration.MEASURE_ITERATIONS;
+import static benchmark.Configuration.NUMBER_OF_FORKS;
+import static benchmark.Configuration.WARM_UP_ITERATIONS;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
