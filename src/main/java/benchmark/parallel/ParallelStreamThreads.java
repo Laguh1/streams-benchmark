@@ -1,4 +1,4 @@
-package benchmark;
+package benchmark.parallel;
 
 import static benchmark.Configuration.EXACT_NUMBER_OF_THREADS;
 import static benchmark.Configuration.JUST_ABOVE__NUMBER_OF_THREADS;
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import benchmark.BuildState;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;

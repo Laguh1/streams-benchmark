@@ -32,8 +32,8 @@ public class BuildState {
         public List<String> limitedStrings;
 
         // @Param({VERY_LARGE_COLLECTION ,LARGE_COLLECTION, AVERAGE_COLLECTION, SMALL_COLLECTION})
-        @Param({SMALL_COLLECTION})
-        private int numberOfElements;
+        @Param({LARGE_COLLECTION})
+        public int numberOfElements;
 
         //Creates a new List of random Strings every time the benchmark method is invoked
         @Setup(Level.Invocation)
@@ -45,7 +45,7 @@ public class BuildState {
            // limitedStrings = createListStringsCheck();
         }
 
-        private List<String> createListOfStrings() {
+        public List<String> createListOfStrings() {
             List<String> list = new ArrayList<>();
             Random r = new Random();
             for (int index = 0; index < numberOfElements; index++) {
@@ -54,7 +54,7 @@ public class BuildState {
             return list;
         }
 
-        private Set<String> createSetOfStrings() {
+        public Set<String> createSetOfStrings() {
             Set<String> set = new HashSet<>();
             Random r = new Random();
             for (int index = 0; index < numberOfElements; index++) {
@@ -63,7 +63,7 @@ public class BuildState {
             return set;
         }
 
-        private List<String> createLinkedStrings() {
+        public List<String> createLinkedStrings() {
             List<String> list = new LinkedList<>();
             Random r = new Random();
             for (int index = 0; index < numberOfElements; index++) {
@@ -72,7 +72,7 @@ public class BuildState {
             return list;
         }
 
-        private List<Employee> createListOfEmployees() {
+        public List<Employee> createListOfEmployees() {
             List<Employee> list = new ArrayList<>();
             for (int index = 0; index < numberOfElements; index++) {
                 list.add(new Employee(String.format("%02d", index), random(1, 'm', 'f')));
@@ -80,13 +80,13 @@ public class BuildState {
             return list;
         }
 
-        private List<String> createListStringsCheck() {
+        public List<String> createListStringsCheck() {
             return Arrays.asList("Foo", "Bar", "New York", "Rio", "Tokio", "Madri", "London", "Paris");
         }
 
-        class Employee {
-            private String id;
-            private String genre;
+        public class Employee {
+            String id;
+            String genre;
 
             public Employee(String id, String genre) {
                 this.id = id;

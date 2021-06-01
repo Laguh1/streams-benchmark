@@ -1,4 +1,4 @@
-package benchmark;
+package benchmark.parallel;
 
 import static benchmark.Configuration.MEASURE_ITERATIONS;
 import static benchmark.Configuration.NUMBER_OF_FORKS;
@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import benchmark.BuildState;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
