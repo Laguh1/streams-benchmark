@@ -17,6 +17,9 @@ import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
 
 import static benchmark.Configuration.MEASURE_ITERATIONS;
@@ -51,16 +54,9 @@ public class ExportReportsTest {
 
     @Test
     public void testBenchmarkCollectionType() throws RunnerException, IOException {
-        File file = checkFileAndCreate(ParallelStreamCollectionType.class.getSimpleName());
-        Options opt = new OptionsBuilder()
-                .include(ParallelStreamCollectionType.class.getSimpleName())
-                .resultFormat(ResultFormatType.JSON)
-                .result(file.getAbsolutePath())
-                .warmupIterations(1)
-                .measurementIterations(1)
-                .forks(1)
-                .build();
-        new Runner(opt).run();
+        String name = ParallelStreamCollectionType.class.getSimpleName();
+        File file = checkFileAndCreate(name);
+        new Runner(getOptions(name, file)).run();
         System.out.println("Finished ");
 
     }
@@ -72,14 +68,28 @@ public class ExportReportsTest {
         File targetFolder = new File(targetFolderPath);
         targetFolder.mkdirs();
         Instant date = Instant.ofEpochMilli(System.currentTimeMillis());
-        LocalDateTime utc = LocalDateTime.ofInstant(date, ZoneOffset.UTC);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+        String utc = dateFormatter.format(ZonedDateTime.ofInstant(date, ZoneOffset.UTC));
         File file = new File(
                 targetFolderPath + name
-                        + "_" + utc.truncatedTo(ChronoUnit.MINUTES) + ".json");
+                        + "_" + utc + ".json");
         if (file.exists()) {
             file.delete();
         }
         file.createNewFile();
         return file;
     }
+
+    private Options getOptions(String name, File file) {
+        return new OptionsBuilder()
+                .include(name)
+                .resultFormat(ResultFormatType.JSON)
+                .result(file.getAbsolutePath())
+                .warmupIterations(1)
+                .measurementIterations(1)
+                .forks(1)
+                .build();
+    }
+
 }
