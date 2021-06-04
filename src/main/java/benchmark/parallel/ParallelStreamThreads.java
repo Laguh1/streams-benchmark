@@ -30,7 +30,6 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = MEASURE_ITERATIONS)
 public class ParallelStreamThreads {
 
-
     @Threads(SMALL_NUMBER_OF_THREADS)
     @Benchmark
     public List<String> sequentialStreamSmallThreads(BuildState.GivenState state) {

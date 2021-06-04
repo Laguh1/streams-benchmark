@@ -1,8 +1,5 @@
 package benchmark.parallel;
 
-import benchmark.parallel.ParallelStreamBenchmark;
-import benchmark.parallel.ParallelStreamCollectionType;
-import benchmark.parallel.ParallelStreamDistinct;
 import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
@@ -22,7 +19,7 @@ import static benchmark.Configuration.MEASURE_ITERATIONS;
 import static benchmark.Configuration.NUMBER_OF_FORKS;
 import static benchmark.Configuration.WARM_UP_ITERATIONS;
 
-public class ExportParallelStreamReportsTest {
+public class ExportStreamReportsTest {
 
 
     @Test
@@ -76,7 +73,7 @@ public class ExportParallelStreamReportsTest {
 
     private File checkFileAndCreate(String name) throws IOException {
         String targetFolderPath = Paths.get(
-                this.getClass().getResource("/").getFile()).getParent().toString() + "/benchmark-result/parallel";
+                this.getClass().getResource("/").getFile()).getParent().toString() + "/benchmark-result/stream";
 
         File targetFolder = new File(targetFolderPath);
         targetFolder.mkdirs();

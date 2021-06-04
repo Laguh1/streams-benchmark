@@ -8,6 +8,7 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -30,9 +31,10 @@ public class BuildState {
         public List<String> linkedStrings;
         public List<Employee> employees;
         public List<String> limitedStrings;
+        public List<BigDecimal> bigDecimals;
 
         // @Param({VERY_LARGE_COLLECTION ,LARGE_COLLECTION, AVERAGE_COLLECTION, SMALL_COLLECTION})
-        @Param({LARGE_COLLECTION})
+        @Param({VERY_LARGE_COLLECTION})
         public int numberOfElements;
 
         //Creates a new List of random Strings every time the benchmark method is invoked
@@ -41,6 +43,7 @@ public class BuildState {
             someStrings = createListOfStrings();
             setOfStrings = createSetOfStrings();
             linkedStrings = createLinkedStrings();
+            bigDecimals = createListOfBigDecimals();
            // employees = createListOfEmployees();
            // limitedStrings = createListStringsCheck();
         }
@@ -50,6 +53,15 @@ public class BuildState {
             Random r = new Random();
             for (int index = 0; index < numberOfElements; index++) {
                 list.add(randomAlphabetic(r.nextInt(10) + 1));
+            }
+            return list;
+        }
+
+        public List<BigDecimal> createListOfBigDecimals() {
+            List<BigDecimal> list = new ArrayList<>();
+            Random r = new Random();
+            for (int index = 0; index < numberOfElements; index++) {
+                list.add(new BigDecimal(r.nextInt(10) + 1));
             }
             return list;
         }
