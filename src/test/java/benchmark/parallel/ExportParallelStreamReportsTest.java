@@ -3,6 +3,7 @@ package benchmark.parallel;
 import benchmark.parallel.ParallelStreamBenchmark;
 import benchmark.parallel.ParallelStreamCollectionType;
 import benchmark.parallel.ParallelStreamDistinct;
+import benchmark.streams.CapturingBenchmark;
 import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
@@ -24,52 +25,9 @@ import static benchmark.Configuration.WARM_UP_ITERATIONS;
 
 public class ExportParallelStreamReportsTest {
 
-
     @Test
-    public void testParallelStreamBenchmark() throws RunnerException, IOException {
-        String name = ParallelStreamBenchmark.class.getSimpleName();
-        File file = checkFileAndCreate(name);
-        new Runner(getOptions(name, file)).run();
-    }
-
-    @Test
-    public void testParallelStreamCollectionType() throws RunnerException, IOException {
-        String name = ParallelStreamCollectionType.class.getSimpleName();
-        File file = checkFileAndCreate(name);
-        new Runner(getOptions(name, file)).run();
-    }
-
-    @Test
-    public void testParallelStreamDistinct() throws RunnerException, IOException {
-        String name = ParallelStreamDistinct.class.getSimpleName();
-        File file = checkFileAndCreate(name);
-        new Runner(getOptions(name, file)).run();
-    }
-
-    @Test
-    public void testParallelStreamGroupBy() throws RunnerException, IOException {
-        String name = ParallelStreamGroupBy.class.getSimpleName();
-        File file = checkFileAndCreate(name);
-        new Runner(getOptions(name, file)).run();
-    }
-
-    @Test
-    public void testParallelStreamLimit() throws RunnerException, IOException {
-        String name = ParallelStreamLimit.class.getSimpleName();
-        File file = checkFileAndCreate(name);
-        new Runner(getOptions(name, file)).run();
-    }
-
-    @Test
-    public void testParallelStreamSort() throws RunnerException, IOException {
-        String name = ParallelStreamSort.class.getSimpleName();
-        File file = checkFileAndCreate(name);
-        new Runner(getOptions(name, file)).run();
-    }
-
-    @Test
-    public void testParallelStreamThreads() throws RunnerException, IOException {
-        String name = ParallelStreamThreads.class.getSimpleName();
+    public void testCapturingBenchmark() throws RunnerException, IOException {
+        String name = CapturingBenchmark.class.getSimpleName();
         File file = checkFileAndCreate(name);
         new Runner(getOptions(name, file)).run();
     }

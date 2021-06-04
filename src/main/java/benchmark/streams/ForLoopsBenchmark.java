@@ -24,7 +24,7 @@ import static benchmark.Configuration.WARM_UP_ITERATIONS;
 @Fork(value = NUMBER_OF_FORKS, jvmArgs = {"-Xms8G", "-Xmx8G"})
 @Warmup(iterations = WARM_UP_ITERATIONS)
 @Measurement(iterations = MEASURE_ITERATIONS)
-public class CapturingBenchmark {
+public class ForLoopsBenchmark {
 
     private static final BigDecimal ONEHUNDRED = new BigDecimal(100);
     private BigDecimal oneHundred = new BigDecimal(100);
